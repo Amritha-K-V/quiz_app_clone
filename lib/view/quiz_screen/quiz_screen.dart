@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 // import 'package:quiz_app_clone/utils/color_constants.dart';
 import 'package:quiz_app_clone/view/Quiz_Database.dart';
 // import 'package:quiz_app_clone/view/quiz_database/quiz_database.dart';
@@ -7,10 +8,12 @@ import 'package:quiz_app_clone/view/quiz_screen/widgets/options_card.dart';
 import 'package:quiz_app_clone/view/result_screen/result_screen.dart';
 
 class QuizScreen extends StatefulWidget {
-  const QuizScreen({super.key});
+  const QuizScreen({super.key, 
+  required this.questionslist});
 
   @override
   State<QuizScreen> createState() => _QuizScreenState();
+  final List questionslist;
 }
 
 class _QuizScreenState extends State<QuizScreen> {
@@ -27,12 +30,12 @@ class _QuizScreenState extends State<QuizScreen> {
         physics: NeverScrollableScrollPhysics(),
         padding: EdgeInsets.all(18),
         children: <Widget>[
-          _buildQuestionSection(),
+          // _buildQuestionSection(),
           SizedBox(height: 10),
-          _buildOptionSelectionSection(),
+          // _buildOptionSelectionSection(),
         ],
       ),
-      bottomNavigationBar: _buildNextButtonSection(context),
+      // bottomNavigationBar: _buildNextButtonSection(context),
     );
   }
 
@@ -42,7 +45,8 @@ class _QuizScreenState extends State<QuizScreen> {
       surfaceTintColor: Colors.black,
       actions: <Widget>[
         Text(
-          "${questionIndex + 1}/${QuizDatabase.questions.length}",
+          "questions",
+          // "${questionIndex + 1}/${QuizDatabase.questions.length}",
           style: TextStyle(
             color: Colors.blue,
             fontSize: 14,
@@ -54,125 +58,130 @@ class _QuizScreenState extends State<QuizScreen> {
     );
   }
 
-  Widget _buildOptionSelectionSection() {
-    return Column(
-      children: List.generate(
-        4,
-        (index) => OptionsCard(
-          borderColor: _getColor(index),
-          questionIndex: questionIndex,
-          optionIndex: index,
-          selectedIcon: selectedAnswerIndex == index
-              ? Icons.radio_button_on
-              : Icons.radio_button_off,
-          onOptionTap: () {
-            if (selectedAnswerIndex == null) {
-              setState(() {
-                selectedAnswerIndex = index;
-                if (selectedAnswerIndex ==
-                    QuizDatabase.questions[questionIndex]["answer"]) {
-                  rightAnswerCount++;
-                } else {
-                  wrongAnswerCount++;
-                }
-              });
-            }
-          },
-        ),
-      ),
-    );
+  // Widget _buildOptionSelectionSection() {
+  //   return Column(
+  //     children: List.generate(
+  //       4,
+  //       (index) => OptionsCard(
+  //         borderColor: _getColor(index),
+  //         questionIndex: questionIndex,
+  //         optionIndex: index,
+  //         selectedIcon: selectedAnswerIndex == index
+  //             ? Icons.radio_button_on
+  //             : Icons.radio_button_off,
+  //         onOptionTap: () {
+  //           if (selectedAnswerIndex == null) {
+  //             setState(() {
+  //               selectedAnswerIndex = index;
+  //               if (selectedAnswerIndex ==
+  //                   QuizDatabase.questions[questionIndex]["answer"]) {
+  //                 rightAnswerCount++;
+  //               } else {
+  //                 wrongAnswerCount++;
+  //               }
+  //             });
+  //           }
+  //         },
+  //       ),
+  //     ),
+  //   );
+  // }
+
+  // Widget? _buildNextButtonSection(BuildContext context) {
+  //   return selectedAnswerIndex == null
+  //       ? null
+  //       : Padding(
+  //           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+  //           child: InkWell(
+  //             borderRadius: BorderRadius.circular(13),
+  //             onTap: () {
+  //               setState(() {
+  //                 selectedAnswerIndex = null;
+  //                 // if (questionIndex < QuizDatabase.questions.length - 1) {
+  //                 //   questionIndex++;
+  //                 // } else {
+  //                 //   Navigator.pushReplacement(
+  //                 //     context,
+  //                     MaterialPageRoute(
+  //                       builder: (context) => ResultScreen(
+  //                         rightAnsCount: rightAnswerCount,
+  //                         wrongAnsCount: wrongAnswerCount,
+  //                       ),
+  //                     ),
+  //                   );
+  //                 }
+  //               });
+  //             },
+  //             child: Container(
+  //               height: 50,
+          //       alignment: Alignment.center,
+          //       decoration: BoxDecoration(
+          //         color: Colors.blue,
+          //         borderRadius: BorderRadius.circular(13),
+          //       ),
+          //       child: Text(
+          //         "Next",
+          //         style: TextStyle(
+          //           color: Colors.white,
+          //           fontSize: 25,
+          //           fontWeight: FontWeight.w500,
+          //           letterSpacing: -1,
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // );
   }
 
-  Widget? _buildNextButtonSection(BuildContext context) {
-    return selectedAnswerIndex == null
-        ? null
-        : Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-            child: InkWell(
-              borderRadius: BorderRadius.circular(13),
-              onTap: () {
-                setState(() {
-                  selectedAnswerIndex = null;
-                  if (questionIndex < QuizDatabase.questions.length - 1) {
-                    questionIndex++;
-                  } else {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ResultScreen(
-                          rightAnsCount: rightAnswerCount,
-                          wrongAnsCount: wrongAnswerCount,
-                        ),
-                      ),
-                    );
-                  }
-                });
-              },
-              child: Container(
-                height: 50,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.circular(13),
-                ),
-                child: Text(
-                  "Next",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 25,
-                    fontWeight: FontWeight.w500,
-                    letterSpacing: -1,
-                  ),
-                ),
-              ),
-            ),
-          );
-  }
-
-  Widget _buildQuestionSection() {
-    return Expanded(
-      child: Stack(
-        children:[ Container(
-          height: 200,
-          alignment: Alignment.centerLeft,
-          padding: EdgeInsets.all(17),
-          decoration: BoxDecoration(
-            color: Colors.grey,
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Text(
-            QuizDatabase.questions[questionIndex]["question"],
-            textAlign: TextAlign.justify,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-        ),
-        // ? selectedAnswerIndex == QuizDatabase.questions[questionIndex]["questions"]
-        // : Lottie.asset
+  // Widget _buildQuestionSection() {
+  //   return Expanded(
+  //     child: Stack(
+  //       children:[ Container(
+  //         height: 200,
+  //         alignment: Alignment.centerLeft,
+  //         padding: EdgeInsets.all(17),
+  //         decoration: BoxDecoration(
+  //           color: Colors.grey,
+  //           borderRadius: BorderRadius.circular(15),
+  //         ),
+  //         child: Text(
+  //           QuizDatabase.questions[questionIndex]["question"],
+  //           textAlign: TextAlign.justify,
+  //           style: TextStyle(
+  //             color: Colors.white,
+  //             fontSize: 20,
+  //             fontWeight: FontWeight.w400,
+  //           ),
+  //         ),
+  //       ),
+  //        selectedAnswerIndex == QuizDatabase.questions[questionIndex]["answers"]
+  //       ? LottieBuilder.asset("assets/lotties/Animation - 1724055881817.json",
+        
+  //       height: 200,
+  //       width: double.infinity,
+  //       )
+  //       :SizedBox(),
       
-        ]
-      ),
+  //       ]
+  //     ),
       
-    );
-  }
+  //   );
+  // }
 
-  Color _getColor(int index) {
-    if (selectedAnswerIndex != null) {
-      if (selectedAnswerIndex == index) {
-        if (selectedAnswerIndex ==
-            QuizDatabase.questions[questionIndex]["answer"]) {
-          return Colors.green;
-        } else {
-          return Colors.red;
-        }
-      }
-      if (index == QuizDatabase.questions[questionIndex]["answer"]) {
-        return Colors.green;
-      }
-    }
-    return Colors.grey.shade600;
-  }
-}
+  // Color _getColor(int index) {
+  //   if (selectedAnswerIndex != null) {
+  //     if (selectedAnswerIndex == index) {
+  //       if (selectedAnswerIndex ==
+  //           QuizDatabase.questions[questionIndex]["answer"]) {
+  //         return Colors.green;
+  //       } else {
+  //         return Colors.red;
+  //       }
+  //     }
+  //     if (index == QuizDatabase.questions[questionIndex]["answer"]) {
+  //       return Colors.green;
+  //     }
+  //   }
+  //   return Colors.grey.shade600;
+  // }
+// }

@@ -20,7 +20,7 @@ class ResultScreen extends StatefulWidget {
 class _ResultScreenState extends State<ResultScreen> {
   int starCount = 0;
   void initstate(){
-    starCount = calPercentage();
+    // starCount = calPercentage();
     super.initState();
   }
   @override
@@ -69,7 +69,8 @@ class _ResultScreenState extends State<ResultScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 15),
                 child: Text(
-                  _getString(),
+                  // _getString(),
+                  "data",
                   style: TextStyle(
                     color: Colors.amber,
                     fontSize: 32,
@@ -79,7 +80,8 @@ class _ResultScreenState extends State<ResultScreen> {
                 ),
               ),
               Text(
-                "${widget.rightAnsCount} / ${QuizDatabase.questions.length}",
+                "Sports",
+                // "${widget.rightAnsCount} / ${QuizDatabase.questions.length}",
                 style: TextStyle(
                   color: Colors.green,
                   fontSize: 32,
@@ -117,11 +119,13 @@ class _ResultScreenState extends State<ResultScreen> {
             child: InkWell(
               borderRadius: BorderRadius.circular(13),
               onTap: () {
-              QuizDatabase.questions.shuffle();
+              // QuizDatabase.questions.shuffle();
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => QuizScreen(),
+                    builder: (context) => QuizScreen(
+                      questionslist: [],
+                    ),
                   ),
                 );
               },
@@ -158,27 +162,27 @@ class _ResultScreenState extends State<ResultScreen> {
           );
   }
 
-  String _getString() {
-    if (widget.rightAnsCount > QuizDatabase.questions.length / 2) {
-      return "Congratulations !";
-    } else {
-      return "Better Luck Next Time 👍";
-    }
-  }
-  int calPercentage(){
-    double percentage =
-    (widget.rightAnsCount / QuizDatabase.questions.length) + 100;
-  print(percentage);
+//   String _getString() {
+//     if (widget.rightAnsCount > QuizDatabase.questions.length / 2) {
+//       return "Congratulations !";
+//     } else {
+//       return "Better Luck Next Time 👍";
+//     }
+//   }
+//   int calPercentage(){
+//     double percentage =
+//     // (widget.rightAnsCount / QuizDatabase.questions.length) + 100;
+//   print(percentage);
 
-  if(percentage >= 80){
-return 3;
-  }else if(percentage >= 50){
-    return 2;
+//   if(percentage >= 80){
+// return 3;
+//   }else if(percentage >= 50){
+//     return 2;
 
-  }else if(percentage >= 30){
-    return 1;
-  }else {
-    return 0;
-  }
-  }
+//   }else if(percentage >= 30){
+//     return 1;
+//   }else {
+//     return 0;
+//   }
+//   }
 }

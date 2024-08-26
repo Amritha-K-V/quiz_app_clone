@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app_clone/view/Quiz_Database.dart';
+import 'package:quiz_app_clone/view/home_screen/home_screen.dart';
 // import 'package:quiz_app_clone/utils/color_constants.dart';
 // import 'package:quiz_app_clone/view/quiz_database/quiz_database.dart';
-import 'package:quiz_app_clone/view/quiz_screen/quiz_screen.dart';
+// import 'package:quiz_app_clone/view/quiz_screen/quiz_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -18,11 +19,11 @@ class _SplashScreenState extends State<SplashScreen> {
       Duration(seconds: 3),
     ).then(
       (value) {
-        QuizDatabase.questions.shuffle();
+        // QuizDatabase.questions.shuffle();
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => QuizScreen(),
+            builder: (context) => HomeScreen(),
           ),
         );
       },

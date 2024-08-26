@@ -36,7 +36,8 @@ class OptionsCard extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Text(
-                QuizDatabase.questions[questionIndex]["options"][optionIndex],
+                "options",
+                // QuizDatabase.questions[questionIndex]["options"][optionIndex],
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 15,
