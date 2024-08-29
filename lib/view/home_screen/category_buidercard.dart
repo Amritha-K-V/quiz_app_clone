@@ -1,28 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_app_clone/view/quiz_database.dart';
-import 'package:quiz_app_clone/view/quiz_screen/quiz_screen.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-class categorybuilder extends StatefulWidget {
+class categorybuilder extends StatelessWidget {
   const categorybuilder({
-    super.key, 
+    super.key,
+     required this.name,
+      required this.image, this.ongridtap, 
   });
-
-  @override
-  State<categorybuilder> createState() => _categorybuilderState();
-}
-
-class _categorybuilderState extends State<categorybuilder> {
- 
+final String name;
+final String image;
+final void Function()? ongridtap;
   @override
   Widget build(BuildContext context) {
-    var index;
+  //  var index;
     return Stack(
       fit: StackFit.expand,
       children: [
         InkWell(
-          onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) =>QuizScreen(questionslist: [],)));
-          },
+          onTap: ongridtap ,
           child: Container(
             padding: EdgeInsets.all(20),
             decoration: BoxDecoration(
@@ -35,22 +30,22 @@ class _categorybuilderState extends State<categorybuilder> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                 QuizDatabase.categorylist[index]["name"],
+              name,
                   style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
           ),
         ),
-        // Positioned(
-        //   bottom: 40,
-        //   left: 50,
-        //   child: SvgPicture.asset(
-        //     "assets/images/sports.svg",
-        //     height: 150, // height 
-        //     width: 150,  // width 
-        //   ),
-        // ),
+        Positioned(
+          bottom: 40,
+          left: 50,
+          child: SvgPicture.asset(
+          image,
+            height: 150, // height 
+            width: 150,  // width 
+          ),
+        ),
       ],
     );
   }

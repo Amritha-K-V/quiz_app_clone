@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:quiz_app_clone/view/quiz_database.dart';
+import 'package:quiz_app_clone/view/dummy_db.dart';
+import 'package:quiz_app_clone/view/home_screen/category_buidercard.dart';
 import 'package:quiz_app_clone/view/quiz_screen/quiz_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -61,8 +62,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisSpacing: 15,
                     mainAxisSpacing: 15,
                   ),
-                  itemBuilder: (context, index) => categorybuilder(),
-                  itemCount: 6,
+                  itemBuilder: (context, index) => categorybuilder(
+                    image: dummy_db.categorylist[index]["image"],
+                    name: dummy_db.categorylist[index]["name"],
+                    ongridtap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) =>QuizScreen(questionslist: dummy_db.categorylist[index]["list"],)));
+          },
+                  ),
+                  itemCount: dummy_db.categorylist.length,
                 ),
               ),
             ],
@@ -73,49 +80,3 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class categorybuilder extends StatelessWidget {
-  const categorybuilder({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        InkWell(
-          onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) =>QuizScreen(questionslist: QuizDatabase.categorylist)));
-          },
-          child: Container(
-            padding: EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              
-              color: Colors.grey.shade800,
-              borderRadius: BorderRadius.circular(6),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Sports",
-                  style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
-        ),
-        Positioned(
-          bottom: 40,
-          left: 50,
-          child: SvgPicture.asset(
-            "assets/images/sports.svg",
-            height: 150, // height 
-            width: 150,  // width 
-          ),
-        ),
-      ],
-    );
-  }
-}

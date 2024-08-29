@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_app_clone/view/Quiz_Database.dart';
+import 'package:quiz_app_clone/view/dummy_db.dart';
+// import 'package:quiz_app_clone/view/Quiz_Database.dart';
 // import 'package:quiz_app_clone/utils/color_constants.dart';
 // import 'package:quiz_app_clone/view/quiz_database/quiz_database.dart';
 import 'package:quiz_app_clone/view/quiz_screen/quiz_screen.dart';
@@ -162,27 +163,27 @@ class _ResultScreenState extends State<ResultScreen> {
           );
   }
 
-//   String _getString() {
-//     if (widget.rightAnsCount > QuizDatabase.questions.length / 2) {
-//       return "Congratulations !";
-//     } else {
-//       return "Better Luck Next Time 👍";
-//     }
-//   }
-//   int calPercentage(){
-//     double percentage =
-//     // (widget.rightAnsCount / QuizDatabase.questions.length) + 100;
-//   print(percentage);
+  String _getString() {
+    if (widget.rightAnsCount > dummy_db.categorylist.length / 2) {
+      return "Congratulations !";
+    } else {
+      return "Better Luck Next Time 👍";
+    }
+  }
+  int calPercentage(){
+    double percentage =
+    (widget.rightAnsCount / dummy_db.categorylist.length) + 100;
+  print(percentage);
 
-//   if(percentage >= 80){
-// return 3;
-//   }else if(percentage >= 50){
-//     return 2;
+  if(percentage >= 80){
+return 3;
+  }else if(percentage >= 50){
+    return 2;
 
-//   }else if(percentage >= 30){
-//     return 1;
-//   }else {
-//     return 0;
-//   }
-//   }
+  }else if(percentage >= 30){
+    return 1;
+  }else {
+    return 0;
+  }
+  }
 }

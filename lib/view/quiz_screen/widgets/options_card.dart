@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 // import 'package:quiz_app_clone/utils/color_constants.dart';
-import 'package:quiz_app_clone/view/Quiz_Database.dart';
+// import 'package:quiz_app_clone/view/Quiz_Database.dart';
 // import 'package:quiz_app_clone/view/quiz_database/quiz_database.dart';
 
 class OptionsCard extends StatelessWidget {
   const OptionsCard({
     super.key,
     required this.questionIndex,
-    required this.optionIndex,
+    required this.option,
     required this.borderColor,
     required this.selectedIcon,
     this.onOptionTap,
   });
 
   final int questionIndex;
-  final int optionIndex;
+  final String option;
   final Color borderColor;
   final IconData selectedIcon;
   final void Function()? onOptionTap;
@@ -36,7 +36,7 @@ class OptionsCard extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Text(
-                "options",
+                option,
                 // QuizDatabase.questions[questionIndex]["options"][optionIndex],
                 style: TextStyle(
                   color: Colors.white,

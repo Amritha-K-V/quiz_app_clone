@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_app_clone/view/Quiz_Database.dart';
+// import 'package:quiz_app_clone/view/Quiz_Database.dart';
 import 'package:quiz_app_clone/view/home_screen/home_screen.dart';
 // import 'package:quiz_app_clone/utils/color_constants.dart';
 // import 'package:quiz_app_clone/view/quiz_database/quiz_database.dart';
@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Duration(seconds: 3),
     ).then(
       (value) {
-        // QuizDatabase.questions.shuffle();
+        
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -45,7 +45,7 @@ class _SplashScreenState extends State<SplashScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Image.network(
-            "https://i.pinimg.com/236x/d0/33/30/d0333051d24ff9adba8cc63b100016a9.jpg",
+            "https://i.pinimg.com/236x/98/01/80/980180fd83341e63a496a4f98d2bd115.jpg",
             height: 180,
             width: 200,
           ),
