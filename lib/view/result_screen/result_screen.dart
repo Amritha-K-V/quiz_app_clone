@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app_clone/view/dummy_db.dart';
+import 'package:quiz_app_clone/view/home_screen/home_screen.dart';
 // import 'package:quiz_app_clone/view/Quiz_Database.dart';
 // import 'package:quiz_app_clone/utils/color_constants.dart';
 // import 'package:quiz_app_clone/view/quiz_database/quiz_database.dart';
-import 'package:quiz_app_clone/view/quiz_screen/quiz_screen.dart';
+// import 'package:quiz_app_clone/view/quiz_screen/quiz_screen.dart';
 
 class ResultScreen extends StatefulWidget {
   const ResultScreen(
@@ -21,7 +22,7 @@ class ResultScreen extends StatefulWidget {
 class _ResultScreenState extends State<ResultScreen> {
   int starCount = 0;
   void initstate(){
-    // starCount = calPercentage();
+    starCount = calPercentage();
     super.initState();
   }
   @override
@@ -70,8 +71,8 @@ class _ResultScreenState extends State<ResultScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 15),
                 child: Text(
-                  // _getString(),
-                  "data",
+                  _getString(),
+              
                   style: TextStyle(
                     color: Colors.amber,
                     fontSize: 32,
@@ -80,16 +81,19 @@ class _ResultScreenState extends State<ResultScreen> {
                   ),
                 ),
               ),
-              Text(
-                "Sports",
-                // "${widget.rightAnsCount} / ${QuizDatabase.questions.length}",
-                style: TextStyle(
-                  color: Colors.green,
-                  fontSize: 32,
-                  fontWeight: FontWeight.w500,
-                  letterSpacing: -1.7,
-                ),
-              ),
+
+
+
+              // Text(
+                
+              //   "${widget.rightAnsCount} / ${w.length}",
+              //   style: TextStyle(
+              //     color: Colors.green,
+              //     fontSize: 32,
+              //     fontWeight: FontWeight.w500,
+              //     letterSpacing: -1.7,
+              //   ),
+              // ),
               SizedBox(height: 15),
               Text(
                 "Correct Answers: ${widget.rightAnsCount}",
@@ -124,8 +128,8 @@ class _ResultScreenState extends State<ResultScreen> {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => QuizScreen(
-                      questionslist: [],
+                    builder: (context) => HomeScreen(
+                      // questionslist: [],
                     ),
                   ),
                 );
@@ -172,8 +176,8 @@ class _ResultScreenState extends State<ResultScreen> {
   }
   int calPercentage(){
     double percentage =
-    (widget.rightAnsCount / dummy_db.categorylist.length) + 100;
-  print(percentage);
+    (widget.rightAnsCount / dummy_db.categorylist.length) * 100;
+  print("percentage=$percentage%",);
 
   if(percentage >= 80){
 return 3;

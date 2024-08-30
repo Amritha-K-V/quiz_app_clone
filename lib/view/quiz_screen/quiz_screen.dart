@@ -65,13 +65,13 @@ class _QuizScreenState extends State<QuizScreen> {
       children: List.generate(
         4,
         (index) => OptionsCard(
-          borderColor: _getColor(index),
+          borderColor: getColor(index),
           questionIndex: questionIndex,
           option: widget.questionslist[questionIndex]["options"][index],
           selectedIcon: selectedAnswerIndex == index
               ? Icons.radio_button_on
               : Icons.radio_button_off,
-          onOptionTap: () {
+              onOptionTap: () {
             if (selectedAnswerIndex == null) {
               setState(() {
                 selectedAnswerIndex = index;
@@ -84,9 +84,11 @@ class _QuizScreenState extends State<QuizScreen> {
               });
             }
           },
+                    ),
+          
         ),
-      ),
-    );
+      );
+    
   }
 
   Widget? _buildNextButtonSection(BuildContext context) {
@@ -173,24 +175,27 @@ class _QuizScreenState extends State<QuizScreen> {
       
     );
   }
-
-  Color _getColor(int index) {
+   Color getColor(int index) {
     if (selectedAnswerIndex != null) {
-      if (selectedAnswerIndex == index) {
-        if (selectedAnswerIndex ==
-            widget.questionslist[questionIndex]["answer"]) {
-          return Colors.green;
-        } else {
-          return Colors.red;
-        }
-      }
-      if (index == widget.questionslist[questionIndex]["answer"]) {
+      if (widget.questionslist[questionIndex]["answers"] == selectedAnswerIndex &&
+          index == selectedAnswerIndex) {
+        return Colors.green;
+      } else if (widget.questionslist[questionIndex]["answers"]
+       !=
+              selectedAnswerIndex &&
+          index == selectedAnswerIndex) {
+        return Colors.red;
+      } else if (widget.questionslist[questionIndex]["answers"] == index) {
         return Colors.green;
       }
     }
-    return Colors.grey.shade600;
+
+    return Colors.grey.shade800;
   }
 
+  
   }
+
+  
 
   

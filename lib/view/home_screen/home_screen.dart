@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+// import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quiz_app_clone/view/dummy_db.dart';
 import 'package:quiz_app_clone/view/home_screen/category_buidercard.dart';
 import 'package:quiz_app_clone/view/quiz_screen/quiz_screen.dart';
